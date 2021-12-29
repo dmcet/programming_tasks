@@ -215,11 +215,7 @@ namespace LabSolver
                         }
 
                         // Interconnect layers if there are multiple ones.
-                        if (nextLayer == null)
-                        {
-                            break;
-                        }
-                        else
+                        if (nextLayer != null)
                         {
                             nextLayer[row, column].Neighbours.Add(currentLayer[row, column]);
                             currentLayer[row, column].Neighbours.Add(nextLayer[row, column]);
