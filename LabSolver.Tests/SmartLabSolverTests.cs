@@ -10,7 +10,11 @@ namespace LabSolver.Tests
 {
     public class SmartLabSolverTests
     {
-        private readonly string exampleLabyrinth =
+        private ILabParser parser;
+
+        public SmartLabSolverTests()
+        {
+            string exampleLabyrinth =
             "3 4 5\r\n" +
             "S....\r\n" +
             ".###.\r\n" +
@@ -34,10 +38,6 @@ namespace LabSolver.Tests
             "\r\n" +
             "0 0 0";
 
-        private ILabParser parser;
-
-        public SmartLabSolverTests()
-        {
             parser = new StringLabParser(exampleLabyrinth);
         }
 

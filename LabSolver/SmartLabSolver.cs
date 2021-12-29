@@ -16,12 +16,6 @@ namespace LabSolver
 
         private async Task<LabResult<uint>> SolveSmart(ILabNode lastNode, ILabNode nextNode)
         {
-            // Remove lastNode from neighbours so that we don't go the same way multiple times.
-            if (lastNode != null)
-            {
-                nextNode.Neighbours.Remove(lastNode);
-            }
-
             // If the given node is the end node, we've solved the lab.
             if (nextNode is ILabEndNode)
             {
@@ -30,6 +24,12 @@ namespace LabSolver
                     Success = true,
                     Result = 0,
                 };
+            }
+
+            // Remove lastNode from neighbours so that we don't go the same way multiple times.
+            if (lastNode != null)
+            {
+                nextNode.Neighbours.Remove(lastNode);
             }
 
             // Otherwise, we must determine if we have non-stone neighbours.
