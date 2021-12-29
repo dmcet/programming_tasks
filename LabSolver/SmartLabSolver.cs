@@ -45,7 +45,6 @@ namespace LabSolver
                 };
             }
 
-
             // Now, we must recursively continue our search.
             var neighbourResults = new List<LabResult<uint>>();
             foreach (var neighbour in maybeNonStoneNeighbours)

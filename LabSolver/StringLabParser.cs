@@ -144,12 +144,12 @@ namespace LabSolver
                     currentLayers.Add(await ProcessLayerLines(currentLayerLines, rowCount, columnCount).ConfigureAwait(false));
                     currentLayerLines.Clear();
                 }
+                // Otherwise, add the line to the lines of the current layer for processing.
                 else
                 {
                     currentLayerLines.Add(line);
                 }
             }
-
 
             return new LabResult<IEnumerable<ILabStartNode>>
             {
