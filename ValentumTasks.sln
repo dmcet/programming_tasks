@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabSolver.Contracts", "LabSolver.Contracts\LabSolver.Contracts.csproj", "{94BE55C9-D4CB-4695-9CB8-44C9CFEA20BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabSolver.Tests", "LabSolver.Tests\LabSolver.Tests.csproj", "{0F68B809-F2C1-4350-9078-B88658DE9FE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabSolver", "LabSolver\LabSolver.csproj", "{A96FDA64-3495-4DF6-8DB3-D9F781A47565}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{94BE55C9-D4CB-4695-9CB8-44C9CFEA20BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94BE55C9-D4CB-4695-9CB8-44C9CFEA20BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94BE55C9-D4CB-4695-9CB8-44C9CFEA20BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F68B809-F2C1-4350-9078-B88658DE9FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F68B809-F2C1-4350-9078-B88658DE9FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F68B809-F2C1-4350-9078-B88658DE9FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F68B809-F2C1-4350-9078-B88658DE9FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A96FDA64-3495-4DF6-8DB3-D9F781A47565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A96FDA64-3495-4DF6-8DB3-D9F781A47565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A96FDA64-3495-4DF6-8DB3-D9F781A47565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A96FDA64-3495-4DF6-8DB3-D9F781A47565}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
