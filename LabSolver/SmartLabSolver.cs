@@ -45,23 +45,22 @@ namespace LabSolver
                 };
             }
 
-            // Save the results.
-            var results = new List<LabResult<uint>>();
 
             // Now, we must recursively continue our search.
+            var neighbourResults = new List<LabResult<uint>>();
             foreach (var neighbour in maybeNonStoneNeighbours)
             {
-                results.Add((await SolveSmart(nextNode, neighbour).ConfigureAwait(false)));
+                neighbourResults.Add((await SolveSmart(nextNode, neighbour).ConfigureAwait(false)));
             }
 
-            var firstResult = results.FirstOrDefault(results => results.Success);
+            var firstResult = neighbourResults.FirstOrDefault(results => results.Success);
             if (firstResult != default)
             {
                 firstResult.Result++;
                 return firstResult;
             }
 
-            return results.FirstOrDefault();
+            return neighbourResults.FirstOrDefault();
         }
     }
 }
