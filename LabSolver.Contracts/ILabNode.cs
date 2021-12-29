@@ -12,6 +12,6 @@ namespace LabSolver.Contracts
         /// <summary>
         /// Contains this nodes' adjacent nodes.
         /// </summary>
-        public IEnumerable<ILabNode> Neighbours { get; }
+        public List<ILabNode> Neighbours { get; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LabSolver.Contracts;
+using LabSolver.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,25 +105,50 @@ namespace LabSolver
 
             var labyrinths = new List<ILabStartNode>();
 
+            var layerCount = -1;
+            var rowCount = -1;
+            var columnCount = -1;
+
+            var currentLayers = new List<ILabNode[,]>();
+            var currentLayerLines = new List<string>();
+
             foreach (var line in lines)
             {
-                if (!ParameterRegex.IsMatch(line))
+                // If the line matches the regex, this is a parameter line.
+                if (ParameterRegex.IsMatch(line))
                 {
-                    continue;
+                    // Finish processing of the current labyrinth. Clear the temporary variables.
+                    if (currentLayers.Count == layerCount)
+                    {
+                        labyrinths.Add(await ConnectLayers(currentLayers).ConfigureAwait(false));
+                        currentLayers.Clear();
+                        currentLayerLines.Clear();
+                    }
+
+                    // Update the parameters.
+                    // We know that these are valid integers due to the Regex, so no exception handling required when parsing.
+                    var groups = ParameterRegex.Match(line).Groups;
+                    layerCount = int.Parse(groups[1].Value);
+                    rowCount = int.Parse(groups[2].Value);
+                    columnCount = int.Parse(groups[3].Value);
+
+                    // If this is the case, we've reached the end of the input. Return everything we've parsed so far.
+                    if (layerCount == 0 && rowCount == 0 && columnCount == 0)
+                    {
+                        break;
+                    }
                 }
-
-                var groups = ParameterRegex.Match(line).Groups;
-
-                var layerCount = int.Parse(groups[1].Value);
-                var rowCount = int.Parse(groups[2].Value);
-                var columnCount = int.Parse(groups[3].Value);
-
-                if (layerCount == 0 && rowCount == 0 && columnCount == 0)
+                // Empty line means that the current layer is over, its lines can be processed.
+                else if (line.Length == 0)
                 {
-                    break;
+                    currentLayers.Add(await ProcessLayerLines(currentLayerLines, rowCount, columnCount).ConfigureAwait(false));
+                    currentLayerLines.Clear();
+                }
+                else
+                {
+                    currentLayerLines.Add(line);
                 }
             }
-
 
 
             return new LabResult<IEnumerable<ILabStartNode>>
@@ -131,6 +157,102 @@ namespace LabSolver
                 Message = $"{labyrinths.Count} labyrinths were found.",
                 Result = labyrinths,
             };
+        }
+
+        private Task<ILabStartNode> ConnectLayers(List<ILabNode[,]> collectedLayers)
+        {
+            ILabStartNode startNode = default;
+
+            var rowCount = collectedLayers.First().GetLength(0);
+            var columnCount = collectedLayers.First().GetLength(1);
+
+            var nextLayer = collectedLayers.FirstOrDefault();
+
+            for (var layer = 0; layer < collectedLayers.Count(); layer++)
+            {
+                if (nextLayer == null)
+                {
+                    break;
+                }
+
+                var currentLayer = nextLayer;
+                nextLayer = collectedLayers.Skip(layer + 1).FirstOrDefault();
+
+                for (var row = 0; row < rowCount; row++)
+                {
+                    for (var column = 0; column < columnCount; column++)
+                    {
+                        var currentNode = currentLayer[row, column];
+
+                        if (currentNode is ILabStartNode labStartNode)
+                        {
+                            startNode = labStartNode;
+                        }
+
+                        // Connect nodes on same layer.
+                        if (row > 0)
+                        {
+                            // top neighbour
+                            currentNode.Neighbours.Add(currentLayer[row - 1, column]);
+                        }
+
+                        if (row < rowCount - 1)
+                        {
+                            // bottom neighbour.
+                            currentNode.Neighbours.Add(currentLayer[row + 1, column]);
+                        }
+
+                        if (column > 0)
+                        {
+                            // left neighbour.
+                            currentNode.Neighbours.Add(currentLayer[row, column - 1]);
+                        }
+
+                        if (column < columnCount - 1)
+                        {
+                            // right neighbour.
+                            currentNode.Neighbours.Add(currentLayer[row, column + 1]);
+                        }
+
+                        // Interconnect layers if there are multiple ones.
+                        if (nextLayer == null)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            nextLayer[row, column].Neighbours.Add(currentLayer[row, column]);
+                            currentLayer[row, column].Neighbours.Add(nextLayer[row, column]);
+                        }
+                    }
+                }
+            }
+
+            return Task.FromResult(startNode);
+        }
+
+        private Task<ILabNode[,]> ProcessLayerLines(List<string> currentLayerLines, int rowCount, int columnCount)
+        {
+            ILabNode[,] layer = new ILabNode[rowCount, columnCount];
+
+            for (var row = 0; row < rowCount; row++)
+            {
+                var currentRow = currentLayerLines[row];
+
+                for (var col = 0; col < columnCount; col++)
+                {
+                    layer[row, col] = currentRow[col] switch
+                    {
+                        'S' => new LabStartNode(),
+                        '.' => new LabAirNode(),
+                        '#' => new LabStoneNode(),
+                        'E' => new LabEndNode(),
+                        _ => throw new FormatException("Illegal character was found. This should not happen because the input was already checked.")
+                    };
+                }
+            }
+
+            return Task.FromResult(layer);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace LabSolver.Nodes
 {
     public class LabNodeBase : ILabNode
     {
-        public IEnumerable<ILabNode> Neighbours { get; } = new LinkedList<ILabNode>();
+        public List<ILabNode> Neighbours { get; } = new List<ILabNode>();
     }
 }
