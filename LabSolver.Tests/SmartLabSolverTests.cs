@@ -47,7 +47,7 @@ namespace LabSolver.Tests
             var firstLab = (await parser.Parse().ConfigureAwait(false)).Result.First();
 
             var solver = new SmartLabSolver();
-            var solveResult = await solver.SolveLabyrinth(firstLab).ConfigureAwait(false);
+            var solveResult = solver.SolveLabyrinth(firstLab);
 
             Assert.True(solveResult.Success);
 
@@ -60,7 +60,7 @@ namespace LabSolver.Tests
             var firstLab = (await parser.Parse().ConfigureAwait(false)).Result.ElementAt(1);
 
             var solver = new SmartLabSolver();
-            var solveResult = await solver.SolveLabyrinth(firstLab).ConfigureAwait(false);
+            var solveResult = solver.SolveLabyrinth(firstLab);
 
             Assert.False(solveResult.Success);
         }

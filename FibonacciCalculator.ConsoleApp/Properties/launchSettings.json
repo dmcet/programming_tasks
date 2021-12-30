@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "FibonacciCalculator.ConsoleApp": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -15,11 +15,15 @@ namespace LabSolver
         private readonly HashSet<char> AllowedCharacters =
             new HashSet<char> { '\r', '\n', '.', '#', 'S', 'E', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ' };
 
-        private string labyrinth;
+        private string labyrinthString;
 
-        public StringLabParser(string labyrinth)
+        /// <summary>
+        /// Constructs a new StringLabParser.
+        /// </summary>
+        /// <param name="labyrinthString">the string from which to read the labyrinth.</param>
+        public StringLabParser(string labyrinthString)
         {
-            this.labyrinth = labyrinth;
+            this.labyrinthString = labyrinthString;
         }
 
         /// <summary>
@@ -29,7 +33,7 @@ namespace LabSolver
         private Task<LabResult<IEnumerable<ILabStartNode>>> ValidateInput()
         {
           // Check for null. I prefer the default keyword over null.
-            if (labyrinth == default)
+            if (labyrinthString == default)
             {
                 return Task.FromResult(
                     new LabResult<IEnumerable<ILabStartNode>>()
@@ -40,7 +44,7 @@ namespace LabSolver
             }
 
             // Check if an empty IEnumerable was given.
-            if (labyrinth.Length == 0)
+            if (labyrinthString.Length == 0)
             {
                 return Task.FromResult(
                     new LabResult<IEnumerable<ILabStartNode>>()
@@ -51,7 +55,7 @@ namespace LabSolver
             }
 
             // Check if there are any illegal symbols. One could probably design a regex for this task :-)
-            if (labyrinth.Any(line => !AllowedCharacters.Contains(line)))
+            if (labyrinthString.Any(line => !AllowedCharacters.Contains(line)))
             {
                 return Task.FromResult(
                 new LabResult<IEnumerable<ILabStartNode>>()
@@ -90,7 +94,7 @@ namespace LabSolver
         private async Task<LabResult<IEnumerable<ILabStartNode>>> ConstructLabyrinth()
         {
             // Split string at CRLF (\r\n).
-            var lines = labyrinth.Split("\r\n");
+            var lines = labyrinthString.Split("\r\n");
 
             // Each labyrinth must contain at least three rows (parameters, empty line and trailing zeros).
             // If there are less than three lines, something is really wrong with the format.

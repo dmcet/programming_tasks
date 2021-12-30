@@ -2,7 +2,7 @@
 
 if (args.Length != 1)
 {
-    Console.WriteLine("Usage: LabSolver.ConsoleApp '<Path_To_File_With_Lab_Text>'");
+    Console.WriteLine("Usage: LabSolver.ConsoleApp.exe '<Path_To_File_With_Lab_Text>'");
     return;
 }
 
@@ -26,7 +26,7 @@ var solver = new SmartLabSolver();
 
 foreach (var lab in labs.Result)
 {
-    var solveResult = await solver.SolveLabyrinth(lab);
+    var solveResult = solver.SolveLabyrinth(lab);
 
     if (solveResult.Success)
     {
