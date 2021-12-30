@@ -24,6 +24,7 @@ namespace FibonacciCalculator
             if (!memory.ContainsKey(number))
             {
                 // Check if the components of the number have already been calculated.
+                // If not, calculate them.
                 if (!memory.ContainsKey(number - 1))
                 {
                     memory[number - 1] = CalculateFibonacciNumber(number - 1);
@@ -34,11 +35,11 @@ namespace FibonacciCalculator
                     memory[number - 2] = CalculateFibonacciNumber(number - 2);
                 }
 
-                // If not, calculate it.
+                // Calculate the Fibonacci number using the formula and save it in the memory for later use.
                 memory[number] = memory[number - 1] + memory[number - 2];
             }
 
-            // In any case, return memory[number].
+            // Finally, return memory[number], which is either the already present result or the freshly calculated one.
             return memory[number];
         }
     }
