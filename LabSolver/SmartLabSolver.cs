@@ -9,12 +9,12 @@ namespace LabSolver
 {
     public class SmartLabSolver : ILabSolver
     {
-        public async Task<LabResult<uint>> SolveLabyrinth(ILabStartNode startNode)
+        public LabResult<uint> SolveLabyrinth(ILabStartNode startNode)
         {
-            return await SolveSmart(default, startNode).ConfigureAwait(false);
+            return SolveSmart(default, startNode);
         }
 
-        private async Task<LabResult<uint>> SolveSmart(ILabNode lastNode, ILabNode nextNode)
+        private LabResult<uint> SolveSmart(ILabNode lastNode, ILabNode nextNode)
         {
             // If the given node is the end node, we've solved the lab.
             if (nextNode is ILabEndNode)
@@ -49,7 +49,7 @@ namespace LabSolver
             var neighbourResults = new List<LabResult<uint>>();
             foreach (var neighbour in maybeNonStoneNeighbours)
             {
-                neighbourResults.Add((await SolveSmart(nextNode, neighbour).ConfigureAwait(false)));
+                neighbourResults.Add(SolveSmart(nextNode, neighbour));
             }
 
             // We check if there's any positive result. If this is the case, we increment the result (= the time needed to leave the labyrinth) by one.

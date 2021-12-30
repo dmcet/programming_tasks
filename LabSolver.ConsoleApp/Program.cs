@@ -26,7 +26,7 @@ var solver = new SmartLabSolver();
 
 foreach (var lab in labs.Result)
 {
-    var solveResult = await solver.SolveLabyrinth(lab);
+    var solveResult = solver.SolveLabyrinth(lab);
 
     if (solveResult.Success)
     {

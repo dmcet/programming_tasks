@@ -13,6 +13,6 @@ namespace LabSolver.Contracts
         /// </summary>
         /// <param name="startNode">the start node of this labyrinth</param>
         /// <returns>a LabResult object encapsulating the result.</returns>
-        Task<LabResult<uint>> SolveLabyrinth(ILabStartNode startNode);
+        LabResult<uint> SolveLabyrinth(ILabStartNode startNode);
     }
 }
