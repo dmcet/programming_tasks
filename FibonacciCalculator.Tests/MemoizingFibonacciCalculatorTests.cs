@@ -10,11 +10,12 @@ namespace FibonacciCalculator.Tests
         [InlineData(5,5)]
         [InlineData(7,13)]
         [InlineData(11,89)]
-        public async Task CalculatorMustCalculateProperFibonacciNumbersForExamples(uint number, ulong expected)
+        [InlineData(459, 15782647469193363394)]
+        public void CalculatorMustCalculateProperFibonacciNumbersForExamples(uint number, ulong expected)
         {
             var calculator = new MemoizingFibonacciCalculator();
 
-            Assert.Equal(expected, await calculator.CalculateFibonacciNumber(number));
+            Assert.Equal(expected, calculator.CalculateFibonacciNumber(number));
         }
 
         [Fact]
@@ -33,7 +34,7 @@ namespace FibonacciCalculator.Tests
             stopwatch.Start();
             foreach (var number in numbers)
             {
-                await calculator.CalculateFibonacciNumber(number).ConfigureAwait(false);
+                calculator.CalculateFibonacciNumber(number);
             }
             stopwatch.Stop();
 

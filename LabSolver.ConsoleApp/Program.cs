@@ -2,7 +2,7 @@
 
 if (args.Length != 1)
 {
-    Console.WriteLine("Usage: LabSolver.ConsoleApp '<Path_To_File_With_Lab_Text>'");
+    Console.WriteLine("Usage: LabSolver.ConsoleApp.exe '<Path_To_File_With_Lab_Text>'");
     return;
 }
 

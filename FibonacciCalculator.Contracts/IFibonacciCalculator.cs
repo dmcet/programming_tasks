@@ -14,6 +14,6 @@ namespace FibonacciCalculator.Contracts
         /// </summary>
         /// <param name="number">the number for which to calculate the Fibonacci number.</param>
         /// <returns>the respective Fibonacci number.</returns>
-        Task<ulong> CalculateFibonacciNumber(uint number);
+        ulong CalculateFibonacciNumber(uint number);
     }
 }

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FibonacciCalculator.ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\Dimi\\Desktop\\Numbers.txt\""
+    }
+  }
+}

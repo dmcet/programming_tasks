@@ -12,7 +12,7 @@ namespace FibonacciCalculator
         /// </summary>
         private readonly Dictionary<uint, ulong> memory = new Dictionary<uint, ulong>();
 
-        public async Task<ulong> CalculateFibonacciNumber(uint number)
+        public ulong CalculateFibonacciNumber(uint number)
         {
             // If the number is 0 or 1, return the number itself.
             if (number == 0 || number == 1)
@@ -23,8 +23,19 @@ namespace FibonacciCalculator
             // Otherwise, check if it was already calculated.
             if (!memory.ContainsKey(number))
             {
+                // Check if the components of the number have already been calculated.
+                if (!memory.ContainsKey(number - 1))
+                {
+                    memory[number - 1] = CalculateFibonacciNumber(number - 1);
+                }
+
+                if (!memory.ContainsKey(number - 2))
+                {
+                    memory[number - 2] = CalculateFibonacciNumber(number - 2);
+                }
+
                 // If not, calculate it.
-                memory[number] = await CalculateFibonacciNumber(number - 1).ConfigureAwait(false) + await CalculateFibonacciNumber(number - 2).ConfigureAwait(false);
+                memory[number] = memory[number - 1] + memory[number - 2];
             }
 
             // In any case, return memory[number].
