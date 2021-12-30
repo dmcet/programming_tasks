@@ -8,15 +8,13 @@ namespace FibonacciCalculator.Tests
 {
     public class StringNumberProviderTests
     {
-        private Random random = new Random();
-
         [Theory]
         [InlineData(10)]
         [InlineData(20)]
         [InlineData(99)]
         public async Task NumberProviderMustParseNumbers(int count)
         {
-            var numberString = GenerateNumberString(count);
+            var numberString = TestUtilities.GenerateNumberString(count);
 
             var numProvider = new StringNumberProvider(numberString);
 
@@ -35,21 +33,6 @@ namespace FibonacciCalculator.Tests
             var numProvider = new StringNumberProvider("ThisIsSomeInvalidString");
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await numProvider.ParseNumbers().ConfigureAwait(false));
-        }
-
-        /// <summary>
-        /// Generates a valid string with numbers.
-        /// </summary>
-        /// <param name="amount">the amount of numbers this string should contain.</param>
-        /// <returns></returns>
-        private string GenerateNumberString(int amount)
-        {
-            var stringBuilder = new StringBuilder();
-            for (var index = 0; index < amount; index++)
-            {
-                stringBuilder.Append(random.Next(0, 5001)).Append("\r\n");
-            }
-            return stringBuilder.ToString();
         }
     }
 }
