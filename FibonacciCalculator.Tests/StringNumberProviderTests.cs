@@ -32,7 +32,9 @@ namespace FibonacciCalculator.Tests
         [Fact]
         public async Task NumberProviderMustThrowIfInvalidString()
         {
+            var numProvider = new StringNumberProvider("ThisIsSomeInvalidString");
 
+            await Assert.ThrowsAsync<ArgumentException>(async () => await numProvider.ParseNumbers().ConfigureAwait(false));
         }
 
         /// <summary>
