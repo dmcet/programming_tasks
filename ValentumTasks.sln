@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabSolver.Tests", "LabSolve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabSolver", "LabSolver\LabSolver.csproj", "{A96FDA64-3495-4DF6-8DB3-D9F781A47565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabSolver.ConsoleApp", "LabSolver.ConsoleApp\LabSolver.ConsoleApp.csproj", "{4A7DDB40-BD88-4B83-93F1-2A6706AB3836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabSolver.ConsoleApp", "LabSolver.ConsoleApp\LabSolver.ConsoleApp.csproj", "{4A7DDB40-BD88-4B83-93F1-2A6706AB3836}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciCalculator.Contracts", "FibonacciCalculator.Contracts\FibonacciCalculator.Contracts.csproj", "{33D4CD11-EBA8-43EB-947F-161DC87D3BFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4A7DDB40-BD88-4B83-93F1-2A6706AB3836}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A7DDB40-BD88-4B83-93F1-2A6706AB3836}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A7DDB40-BD88-4B83-93F1-2A6706AB3836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D4CD11-EBA8-43EB-947F-161DC87D3BFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D4CD11-EBA8-43EB-947F-161DC87D3BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D4CD11-EBA8-43EB-947F-161DC87D3BFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D4CD11-EBA8-43EB-947F-161DC87D3BFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
