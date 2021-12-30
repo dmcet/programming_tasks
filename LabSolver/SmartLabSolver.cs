@@ -52,6 +52,8 @@ namespace LabSolver
                 neighbourResults.Add((await SolveSmart(nextNode, neighbour).ConfigureAwait(false)));
             }
 
+            // We check if there's any positive result. If this is the case, we increment the result (= the time needed to leave the labyrinth) by one.
+            // This results in the final result carrying the total time.
             var firstResult = neighbourResults.FirstOrDefault(results => results.Success);
             if (firstResult != default)
             {
@@ -59,6 +61,7 @@ namespace LabSolver
                 return firstResult;
             }
 
+            // If we were unable to find a positive result, just return the first result, which is negative.
             return neighbourResults.FirstOrDefault();
         }
     }
