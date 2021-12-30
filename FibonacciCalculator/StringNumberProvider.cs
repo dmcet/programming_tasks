@@ -29,7 +29,7 @@ namespace FibonacciCalculator
                 return Task.FromResult<IEnumerable<uint>>(
                     source
                     .Split("\r\n") // Split at CRLF.
-                    .Where(str => str.Length > 0) // Remove non-empty strings.
+                    .Where(str => str.Length > 0) // Remove empty strings.
                     .Select(str => uint.Parse(str)) // Convert to uint.
                     .ToList()); // Use ToList() so that the query is performed once and not evaluated lazily.
             }   
